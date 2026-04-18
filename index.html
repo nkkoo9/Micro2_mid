@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>중간고사 유형별 풀이법 요약 · 미시경제학 II</title>
+
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true
+    },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #0f1117;
+  --surface: #1a1d27;
+  --surface2: #22263a;
+  --surface3: #2a2f45;
+  --accent: #4f8ef7;
+  --accent2: #7dd3a8;
+  --text: #e8eaf0;
+  --text-muted: #8b90a8;
+  --text-dim: #6a6f85;
+  --border: #2e3250;
+  --highlight: #f4c842;
+  --danger: #f08a8a;
+  --purple: #b18cf5;
+  --cyan: #6fcfd9;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+body {
+  font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  font-size: 15px;
+}
+
+code, .mono { font-family: 'JetBrains Mono', monospace; }
+
+/* Header */
+header.top {
+  background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 28px 20px 20px;
+  text-align: center;
+}
+header.top h1 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+  letter-spacing: -0.3px;
+}
+header.top .subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Sticky Nav */
+nav.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(15, 17, 23, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 14px;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+nav.sticky::-webkit-scrollbar { height: 4px; }
+nav.sticky::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+nav.sticky a {
+  display: inline-block;
+  padding: 7px 12px;
+  margin-right: 6px;
+  border-radius: 999px;
+  background: var(--surface2);
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid var(--border);
+  transition: all 0.15s;
+}
+nav.sticky a:hover, nav.sticky a:active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+nav.sticky a .num {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  margin-right: 4px;
+  opacity: 0.7;
+}
+
+/* Category groups in nav */
+nav.sticky .group-label {
+  display: inline-block;
+  margin-right: 8px;
+  padding: 0 6px;
+  color: var(--text-dim);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* Main */
+main {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 24px 18px 80px;
+}
+
+/* Section cards */
+section.type {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px 20px;
+  margin-bottom: 20px;
+  scroll-margin-top: 72px;
+}
+
+section.type > h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 19px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+section.type > h2 .num {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--accent);
+  font-size: 18px;
+  font-weight: 700;
+  padding: 3px 9px;
+  background: rgba(79, 142, 247, 0.1);
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+section.type.dominance > h2 .num { color: var(--highlight); background: rgba(244, 200, 66, 0.1); }
+section.type.equilibrium > h2 .num { color: var(--accent); background: rgba(79, 142, 247, 0.1); }
+section.type.application > h2 .num { color: var(--accent2); background: rgba(125, 211, 168, 0.1); }
+section.type.dynamic > h2 .num { color: var(--purple); background: rgba(177, 140, 245, 0.1); }
+
+/* Block types */
+.block {
+  background: var(--surface2);
+  border-left: 3px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-top: 14px;
+}
+.block.core { border-left-color: var(--accent); }
+.block.approach { border-left-color: var(--accent2); }
+.block.caution { border-left-color: var(--highlight); }
+.block.problems { border-left-color: var(--purple); }
+
+.block h3 {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.block.core h3 { color: var(--accent); }
+.block.approach h3 { color: var(--accent2); }
+.block.caution h3 { color: var(--highlight); }
+.block.problems h3 { color: var(--purple); }
+
+.block h3 .icon {
+  font-size: 14px;
+}
+
+/* Content */
+.block p { margin-bottom: 8px; }
+.block p:last-child { margin-bottom: 0; }
+
+.block ol, .block ul {
+  padding-left: 22px;
+  margin-top: 4px;
+}
+.block ol li, .block ul li {
+  margin-bottom: 6px;
+  line-height: 1.65;
+}
+.block ol li::marker { color: var(--accent2); font-weight: 600; }
+.block ul li::marker { color: var(--text-muted); }
+
+.block strong { color: var(--text); font-weight: 600; }
+.block em {
+  color: var(--highlight);
+  font-style: normal;
+  font-weight: 500;
+}
+
+/* Math */
+mjx-container { font-size: 1em !important; }
+
+/* Inline code-like formula tag */
+.tag {
+  display: inline-block;
+  padding: 2px 7px;
+  background: var(--surface3);
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.88em;
+  color: var(--cyan);
+}
+
+/* Exam reference tag */
+.exam {
+  display: inline-block;
+  padding: 3px 8px;
+  margin: 3px 4px 3px 0;
+  background: rgba(177, 140, 245, 0.12);
+  color: var(--purple);
+  border: 1px solid rgba(177, 140, 245, 0.3);
+  border-radius: 5px;
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+}
+.exam.current {
+  background: rgba(244, 200, 66, 0.15);
+  color: var(--highlight);
+  border-color: rgba(244, 200, 66, 0.4);
+}
+
+/* Sub-points / nested */
+.sub {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 12px;
+  margin: 8px 0;
+  font-size: 0.95em;
+}
+.sub .label {
+  display: inline-block;
+  color: var(--highlight);
+  font-weight: 600;
+  font-size: 0.92em;
+  margin-right: 6px;
+}
+
+/* Case list */
+.cases {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 8px;
+}
+.cases li {
+  padding: 8px 12px;
+  margin-bottom: 6px;
+  background: var(--surface);
+  border-left: 3px solid var(--cyan);
+  border-radius: 0 6px 6px 0;
+}
+.cases li::marker { content: none; }
+.cases li .case-label {
+  font-weight: 600;
+  color: var(--cyan);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9em;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+/* Summary checklist at bottom */
+.checklist {
+  background: linear-gradient(135deg, rgba(244, 200, 66, 0.08), rgba(79, 142, 247, 0.08));
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px 22px;
+  margin-top: 32px;
+}
+.checklist h2 {
+  font-size: 18px;
+  margin-bottom: 14px;
+  color: var(--highlight);
+}
+.checklist ul { padding-left: 24px; }
+.checklist li { margin-bottom: 10px; }
+.checklist li strong { color: var(--highlight); }
+
+/* Divider */
+.divider {
+  margin: 28px 0 16px;
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-weight: 600;
+  position: relative;
+}
+.divider::before, .divider::after {
+  content: '';
+  display: inline-block;
+  width: 40px;
+  height: 1px;
+  background: var(--border);
+  vertical-align: middle;
+  margin: 0 12px;
+}
+
+footer {
+  text-align: center;
+  padding: 30px 20px;
+  color: var(--text-dim);
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  header.top { padding: 22px 16px 16px; }
+  header.top h1 { font-size: 18px; }
+  header.top .subtitle { font-size: 12px; }
+  main { padding: 18px 14px 60px; }
+  section.type { padding: 18px 16px; }
+  section.type > h2 { font-size: 17px; }
+  .block { padding: 12px 14px; }
+  body { font-size: 14.5px; }
+}
+
+/* Print */
+@media print {
+  nav.sticky { display: none; }
+  section.type { break-inside: avoid; }
+  body { background: white; color: black; }
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <h1>중간고사 유형별 풀이법 요약</h1>
+  <div class="subtitle">미시경제학 II · ECO5031 · LN1~LN3 · 2026S</div>
+</header>
+
+<nav class="sticky">
+  <span class="group-label">우위</span>
+  <a href="#t1"><span class="num">1</span>Strict Dom</a>
+  <a href="#t2"><span class="num">2</span>IDSDS</a>
+  <a href="#t3"><span class="num">3</span>Weak Dom</a>
+  <span class="group-label">균형</span>
+  <a href="#t4"><span class="num">4</span>PSNE</a>
+  <a href="#t5"><span class="num">5</span>MSNE</a>
+  <a href="#t6"><span class="num">6</span>THPE</a>
+  <span class="group-label">응용</span>
+  <a href="#t7"><span class="num">7</span>Cournot</a>
+  <a href="#t8"><span class="num">8</span>Stackelberg</a>
+  <a href="#t9"><span class="num">9</span>Bertrand</a>
+  <a href="#t10"><span class="num">10</span>Hotelling</a>
+  <a href="#t11"><span class="num">11</span>Voting</a>
+  <span class="group-label">동적</span>
+  <a href="#t12"><span class="num">12</span>SPNE</a>
+  <a href="#checklist"><span class="num">★</span>체크리스트</a>
+</nav>
+
+<main>
+
+<!-- ====================================================== -->
+<!-- CATEGORY: 우위 개념 -->
+<!-- ====================================================== -->
+
+<div class="divider">우위 개념</div>
+
+<!-- 1. Strictly Dominated -->
+<section class="type dominance" id="t1">
+  <h2><span class="num">01</span>Strictly Dominated Strategies</h2>
+
+  <div class="block core">
+    <h3><span class="icon">◆</span>핵심</h3>
+    <p>전략 $s_i'$가 $s_i$를 strictly dominate: <strong>모든 상대 전략</strong> $s_{-i}$에 대해
+      $$u_i(s_i', s_{-i}) > u_i(s_i, s_{-i})$$
+      같거나 크면 안 되고 <em>무조건 모두 커야</em> 함.</p>
+  </div>
+
+  <div class="block approach">
+    <h3><span class="icon">▶</span>풀이 절차</h3>
+    <ol>
+      <li>각 플레이어 전략 쌍 $(s_i, s_i')$에 대해 상대 전략 각각에서 payoff 비교.</li>
+      <li>한 번이라도 $s_i$ payoff가 $\geq s_i'$이면 strictly dominated 아님.</li>
+      <li><strong>혼합 전략에 의한 지배</strong>도 체크 — 순수 전략 하나로는 지배 안 되지만 두 순수 전략의 확률혼합이 지배할 수 있음.</li>
+    </ol>
+  </div>
+
+  <div class="block caution">
+    <h3><span class="icon">⚠</span>주의점</h3>
+    <ul>
+      <li>Strictly dominated 전략은 <strong>어떤 NE에서도 양의 확률로 사용되지 않음</strong>.</li>
+      <li>혼합 지배 예시: 2026 HW1 Q1a에서 Player 1의 B는 $\tfrac{1}{2}A + \tfrac{1}{2}C$ 혼합에 strictly dominated.</li>
+    </ul>
+  </div>
+
+  <div class="block problems">
+    <h3><span class="icon">◈</span>기출</h3>
+    <span class="exam current">2026 HW1 Q1a</span>
+    <span class="exam">2025 HW1 Q1a</span>
+    <span class="exam">2024 HW1 Q1a</span>
+  </div>
+</section>
+
+<!-- 2. IDSDS -->
+<section class="type dominance" id="t2">
+  <h2><span class="num">02</span>IDSDS (Iterative Deletion)</h2>
+
+  <div class="block core">
+    <h3><span class="icon">◆</span>핵심</h3>
+    <p>Strictly dominated 전략을 <strong>반복 소거</strong>하여 게임 축소. Rationality + common knowledge of rationality의 결과.</p>
+  </div>
+
+  <div class="block approach">
+    <h3><span class="icon">▶</span>풀이 절차</h3>
+    <ol>
+      <li>현재 게임에서 strictly dominated 전략 모두 소거.</li>
+      <li>축소된 게임에서 다시 dominated 전략 검사.</li>
+      <li>더 이상 소거 안 될 때까지 반복.</li>
+      <li><em>Dominance solvable</em>: 유일한 전략쌍으로 귀착되는 경우.</li>
+    </ol>
+  </div>
+
+  <div class="block caution">
+    <h3><span class="icon">⚠</span>주의점</h3>
+    <ul>
+      <li><strong>소거 순서 무관</strong> (strict dominance 기준) — 최종 결과 동일.</li>
+      <li>IDSDS 생존은 NE의 <em>필요조건</em>이지 충분조건 아님.</li>
+      <li>각 단계에서 <strong>혼합 전략에 의한 지배</strong> 놓치지 말기.</li>
+    </ul>
+  </div>
+
+  <div class="block problems">
+    <h3><span class="icon">◈</span>기출</h3>
+    <span class="exam current">2026 HW1 Q1b</span>
+    <span class="exam">2025 HW1 Q1b</span>
+    <span class="exam">2024 HW1 Q1b</span>
+  </div>
+</section>
+
+<!-- 3. Weak Dominance / IDWDS -->
+<section class="type dominance" id="t3">
+  <h2><span class="num">03</span>Weak Dominance / IDWDS</h2>
+
+  <div class="block core">
+    <h3><span class="icon">◆</span>핵심</h3>
+    <p>$s_i'$가 $s_i$를 weakly dominate: 모든 $s_{-i}$에서 $\geq$이고, <strong>최소 하나에서</strong> $>$.
+    $$\forall s_{-i}: u_i(s_i', s_{-i}) \geq u_i(s_i, s_{-i}), \quad \exists s_{-i}: >$$</p>
+  </div>
+
+  <div class="block caution">
+    <h3><span class="icon">⚠</span>주의점</h3>
+    <ul>
+      <li><strong>소거 순서에 따라 결과 달라짐</strong> — IDWDS는 순서 의존. 다른 NE 집합이 나올 수 있음.</li>
+      <li>Weakly dominated 전략도 NE에서 사용 가능 (strictly dominated는 불가).</li>
+      <li>2인 게임에서 <strong>THPE = weakly undominated NE</strong> — THPE가 weak dominance 배제 역할.</li>
+    </ul>
+  </div>
+
+  <div class="block problems">
+    <h3><span class="icon">◈</span>기출</h3>
+    <p>기출에 명시 출제 없음 (LN2 p28–29). THPE 판별 시 암묵적으로 쓰임.</p>
+  </div>
+</section>
+
+<!-- ====================================================== -->
+<!-- CATEGORY: 균형 개념 -->
+<!-- ====================================================== -->
+
+<div class="divider">균형 개념</div>
+
+<!-- 4. PSNE -->
+<section class="type equilibrium" id="t4">
+  <h2><span class="num">04</span>Pure Strategy Nash Equilibrium</h2>
+
+  <div class="block core">
+    <h3><span class="icon">◆</span>핵심</h3>
+    <p>전략 profile $s^*$가 NE: 모든 $i$에 대해
+      $$s_i^* \in \arg\max_{s_i \in S_i} u_i(s_i, s_{-i}^*)$$
+    모든 플레이어가 상대 전략에 대한 best response.</p>
+  </div>
+
+  <div class="block approach">
+    <h3><span class="icon">▶</span>풀이 절차</h3>
+    <ol>
+      <li><strong>Best response 방식</strong>: 각 플레이어의 BR 집합을 구하고 교집합 찾기.</li>
+      <li><strong>이탈유인 체크 방식</strong>: 후보 profile에서 각 플레이어가 이탈 시 payoff 감소 확인.</li>
+      <li><strong>파라미터 역문제</strong>: 특정 profile이 NE 되도록 $(x, y, z)$ 범위 찾기 — BR 부등식 직접 세우기 (2024 Midterm Q1a).</li>
+    </ol>
+  </div>
+
+  <div class="block caution">
+    <h3><span class="icon">⚠</span>주의점</h3>
+    <ul>
+      <li><strong>충분조건</strong>: 어떤 플레이어도 이탈 유인 없음.</li>
+      <li><strong>필요조건</strong>: 다른 profile은 NE가 아님을 증명 (모든 NE를 구하라는 문제에선 필수).</li>
+      <li>PSNE 없는 경우 있음 (예: Matching Pennies) → MSNE로 이동.</li>
+    </ul>
+  </div>
+
+  <div class="block problems">
+    <h3><span class="icon">◈</span>기출</h3>
+    <span class="exam current">2026 HW1 Q1c</span>
+    <span class="exam">2024 Midterm Q1a</span>
+    <span class="exam">2025F 논자시 Q1</span>
+    <span class="exam">2025S 논자시 Q1</span>
+    <span class="exam">2024 HW1 Q1c</span>
+  </div>
+</section>
+
+<!-- 5. MSNE -->
+<section class="type equilibrium" id="t5">
+  <h2><span class="num">05</span>Mixed Strategy Nash Equilibrium</h2>
+
+  <div class="block core">
+    <h3><span class="icon">◆</span>핵심</h3>
+    <p><strong>Indifference Principle</strong>: 플레이어 $i$가 두 순수 전략 $s_i, s_i'$을 양의 확률로 혼합하려면
+      $$u_i(s_i, \sigma_{-i}) = u_i(s_i', \sigma_{-i})$$
+    믹스했을 때 각 사용되는 pure 전략의 기대 효용이 <em>같아야</em> 함.</p>
+  </div>
+
+  <div class="block approach">
+    <h3><span class="icon">▶</span>풀이 절차</h3>
+    <ol>
+      <li>각 플레이어의 혼합 확률 설정 (2전략 게임이면 $p, 1-p$ / $q, 1-q$).</li>
+      <li>상대의 각 순수 전략에 대한 기대효용 식 작성.</li>
+      <li>무차별 조건 연립방정식 풀기.</li>
+      <li>$p, q \in (0, 1)$ 내부해 확인.</li>
+    </ol>
+  </div>
+
+  <div class="block caution">
+    <h3><span class="icon">⚠</span>주의점</h3>
+    <ul>
+      <li><strong>완전혼합(Completely Mixed) 변종</strong>: 모든 pure 전략에 양의 확률 → 모든 pure 전략의 기대효용이 <em>동시에</em> 같아야 함. 연립방정식 늘어남 (2024 Midterm Q1b: P2의 L, M, R 셋 다 양의 확률).</li>
+      <li>PSNE도 MSNE의 특수 경우 ($\sigma_i$가 degenerate).</li>
+      <li>Strictly dominated 전략은 MSNE에서도 사용되지 않음.</li>
+    </ul>
+  </div>
+
+  <div class="block problems">
+    <h3><span class="icon">◈</span>기출</h3>
+    <span class="exam current">2026 HW1 Q1d</span>
+    <span class="exam">2024 Midterm Q1b</span>
+    <span class="exam">2025F 논자시 Q1</span>
+    <span class="exam">2024 HW1 Q1d, Q2a</span>
+  </div>
+</section>
+
+<!-- 6. THPE -->
+<section class="type equilibrium" id="t6">
+  <h2><span class="num">06</span>Trembling-Hand Perfect Equilibrium</h2>
+
+  <div class="block core">
+    <h3><span class="icon">◆</span>핵심</h3>
+    <p>NE $\sigma^*$가 THPE: <strong>적어도 하나의</strong> 완전혼합 perturbation 수열 $\{\sigma^\epsilon\}$이 존재하여
+      $$\sigma^\epsilon \to \sigma^*, \quad \sigma_i^* \in BR_i(\sigma_{-i}^\epsilon) \text{ for all } \epsilon$$
+    <em>epsilon만큼 손 떨어서 다른 전략 고르는</em> perturbation에도 NE 유지.</p>
+  </div>
+
+  <div class="block approach">
+    <h3><span class="icon">▶</span>풀이 절차</h3>
+    <ol>
+      <li>먼저 NE(PSNE + MSNE) 모두 구하기.</li>
+      <li>각 NE에 대해 상대가 작은 확률 $\epsilon$로 <em>다른</em> 전략을 쓴다고 가정.</li>
+      <li>Perturbation 하에서 내 전략이 여전히 best response인지 확인.</li>
+      <li><strong>하나라도 지지하는 수열이 존재하면 THPE</strong> — 모든 perturbation에 대해 robust할 필요 없음.</li>
+    </ol>
+  </div>
+
+  <div class="block caution">
+    <h3><span class="icon">⚠</span>주의점</h3>
+    <ul>
+      <li><strong>Weakly dominated 순수전략은 THPE에서 배제</strong>됨.</li>
+      <li>2인 게임에서 THPE $\Leftrightarrow$ weakly undominated NE (유용한 shortcut).</li>
+      <li>"Dangerous NE" (이득이 없거나 낮지만 이탈 시 큰 손실) 판별 시 핵심.</li>
+    </ul>
+  </div>
+
+  <div class="block problems">
+    <h3><span class="icon">◈</span>기출</h3>
+    <span class="exam">2025 Midterm Q4</span>
+    <span class="exam">2025 HW1 Q3b</span>
+    <span class="exam">2024 HW1 Q2b</span>
+  </div>
+</section>
+
+<!-- ====================================================== -->
+<!-- CATEGORY: 응용 모델 -->
+<!-- ====================================================== -->
+
+<div class="divider">응용 모델</div>
+
+<!-- 7. Cournot -->
+<section class="type application" id="t7">
+  <h2><span class="num">07</span>Cournot 수량경쟁 (동시)</h2>
+
+  <div class="block core">
+    <h3><span class="icon">◆</span>핵심</h3>
+    <p>$n$개 기업이 <strong>동시에</strong> 수량 $q_i$ 선택. 역수요 $p = a - Q$, $Q = \sum q_i$, 각 기업 한계비용 $c_i$.</p>
+  </div>
+
+  <div class="block approach">
+    <h3><span class="icon">▶</span>풀이 절차</h3>
+    <ol>
+      <li>Firm $i$ 이윤: $\pi_i = (a - Q)q_i - c_i q_i$.</li>
+      <li>FOC: $\dfrac{\partial \pi_i}{\partial q_i} = a - 2q_i - q_{-i} - c_i = 0$.</li>
+      <li>Best response: $q_i^*(q_{-i}) = \dfrac{a - c_i - q_{-i}}{2}$.</li>
+      <li>연립해: 대칭 $n$기업 동일 비용이면 $q^* = \dfrac{a - c}{n+1}$.</li>
+    </ol>
+  </div>
+
+  <div class="block caution">
+    <h3><span class="icon">⚠</span>주의점</h3>
+    <ul>
+      <li><strong>비대칭 비용 변종</strong> (거의 고정 출제): firm 1만 $c + \Delta$, 나머지 $c$. 비용 높은 firm 생산량 감소. 2024 HW1 Q3b.</li>
+      <li>일반화된 수요 $p = A - tQ$: $t$ 증가하면 수요 탄력성 감소, 기업 이윤 증가. 2024 HW1 Q3a.</li>
+      <li>SOC / 비음수 제약 $q_i \geq 0$ 체크.</li>
+    </ul>
+  </div>
+
+  <div class="block problems">
+    <h3><span class="icon">◈</span>기출</h3>
+    <span class="exam">2024 HW1 Q3</span>
+    <span class="exam">2025 HW1 Q(대응)</span>
+  </div>
+</section>
+
+<!-- 8. Stackelberg -->
+<section class="type application" id="t8">
+  <h2><span class="num">08</span>Stackelberg 순차경쟁</h2>
+
+  <div class="block core">
+    <h3><span class="icon">◆</span>핵심</h3>
+    <p>Leader가 먼저 $q_L$ 선택 → Follower가 관측 후 $q_F$ 선택. <strong>SPNE는 역행귀납</strong>.</p>
+  </div>
+
+  <div class="block approach">
+    <h3><span class="icon">▶</span>풀이 절차</h3>
+    <ol>
+      <li><strong>Follower 먼저</strong>: 임의 $q_L$에 대한 BR $q_F^*(q_L)$ 도출 (FOC).</li>
+      <li><strong>Leader 내재화</strong>: $\pi_L(q_L, q_F^*(q_L))$ 최대화.</li>
+      <li>FOC로 $q_L^*$, 다시 $q_F^* = q_F^*(q_L^*)$ 계산.</li>
+      <li><strong>참여제약 (IR) 체크</strong>: Follower의 현 선택 payoff ≥ outside option.</li>
+    </ol>
+  </div>
+
+  <div class="block caution">
+    <h3><span class="icon">⚠</span>주의점</h3>
+    <ul>
+      <li><strong>결과 직관</strong>: Cournot 대비 Leader 이윤 ↑, Follower 이윤 ↓. First-mover advantage.</li>
+      <li><strong>Firm-worker 순차</strong> (2025 Midterm Q2, 2026 HW2 Q2): Firm이 $K$ 먼저 선택 → Worker가 $L^*(K)$ 반응. Worker의 <em>outside option $w$</em> (다른 회사 임금)과의 IR 비교 반드시 체크.</li>
+      <li><strong>순차 voting</strong> (2026 HW2 Q3b): B가 $x_A$ 관측 가능하면 Stackelberg 구조. B는 $x_A$의 $\epsilon$ 우측(또는 좌측)에 붙어 과반 가져감.</li>
+    </ul>
+  </div>
+
+  <div class="block problems">
+    <h3><span class="icon">◈</span>기출</h3>
+    <span class="exam current">2026 HW2 Q2, Q3b</span>
+    <span class="exam">2025 Midterm Q2</span>
+    <span class="exam">2025 HW2 Q2</span>
+  </div>
+</section>
+
+<!-- 9. Bertrand -->
+<section class="type application" id="t9">
+  <h2><span class="num">09</span>Bertrand 가격경쟁</h2>
+
+  <div class="block core">
+    <h3><span class="icon">◆</span>핵심</h3>
+    <p>두 기업이 <strong>동시에</strong> 가격 $p_1, p_2$ 제시. 소비자는 낮은 가격 기업 선택. 수요 $D(p) = a - p$.</p>
+  </div>
+
+  <div class="block approach">
+    <h3><span class="icon">▶</span>풀이 절차</h3>
+    <div class="sub">
+      <span class="label">Case 1:</span> <strong>대칭 비용</strong> $c_1 = c_2 = c$
+      <p>유일 PSNE: $p_1^* = p_2^* = c$. Bertrand Paradox.</p>
+    </div>
+    <div class="sub">
+      <span class="label">Case 2:</span> <strong>비대칭 비용</strong> $c_1 < c_2$ (tie-breaking: 낮은 비용 기업 우선)
+      <p>유일 PSNE: $p_1^* = p_2^* = c_2$. Firm 1이 시장 전체 독점.</p>
+      <p class="mono" style="margin-top:6px; color:var(--text-muted); font-size:0.9em;">핵심 논리: firm 1이 $p_1 = c_2$를 제시하면 firm 2는 이익 없이 가격 맞추기만 가능. Firm 1이 $p_1 &gt; c_2$면 firm 2가 $p_1 - \epsilon$로 할인 유인. Firm 1이 $p_1 &lt; c_2$면 firm 2는 진입 불가.</p>
+    </div>
+  </div>
+
+  <div class="block caution">
+    <h3><span class="icon">⚠</span>주의점</h3>
+    <ul>
+      <li>Tie-breaking 규칙 확인: "동일 가격 시 균등분배" vs "낮은 비용 기업 우선".</li>
+      <li>비대칭 비용에서 $p_1^* = c_2$가 되는 이유는 <strong>tie-breaking rule이 낮은 비용 기업에 유리</strong>하기 때문. 이게 반대면 PSNE 존재 안 할 수 있음 (경계 문제).</li>
+      <li>$\epsilon$-argument는 <em>엄밀한 증명용</em>이지 실제 NE 구성 요소 아님.</li>
+    </ul>
+  </div>
+
+  <div class="block problems">
+    <h3><span class="icon">◈</span>기출</h3>
+    <span class="exam">2025F 논자시 Q4</span>
+    <span class="exam">2025S 논자시 Q1</span>
+    <span class="exam current">HW1_Bertrand_Model (본인 정리)</span>
+  </div>
+</section>
+
+<!-- 10. Hotelling -->
+<section class="type application" id="t10">
+  <h2><span class="num">10</span>Hotelling 공간경쟁</h2>
+
+  <div class="block core">
+    <h3><span class="icon">◆</span>핵심</h3>
+    <p>소비자 $x \in [0,1]$ uniform 분포. Firm A at $x=0$, Firm B at $x=1$. 이동비용 $x$ (A로), $1-x$ (B로). 효용 $s - p_i - \text{cost}$.
+      <strong>무차별 소비자 $x^*$ 구하고 각 기업 수요 산정</strong>.</p>
+  </div>
+
+  <div class="block approach">
+    <h3><span class="icon">▶</span>풀이 절차</h3>
+    <ol>
+      <li>무차별 조건: $s - p_A - x^* = s - p_B - (1 - x^*)$ → $x^* = \dfrac{p_B - p_A + 1}{2}$ (outside option 없을 때).</li>
+      <li>수요: $D_A = x^*$, $D_B = 1 - x^*$.</li>
+      <li>이윤: $\pi_A = p_A \cdot x^*$, FOC로 BR.</li>
+      <li>대칭 NE: $p_A^* = p_B^* = 1$ (단위 이동비용 기준).</li>
+    </ol>
+  </div>
+
+  <div class="block caution">
+    <h3><span class="icon">⚠</span>주의점 — <em>Outside option이 케이스 분기의 핵심</em></h3>
+    <ul class="cases">
+      <li><span class="case-label">$s \geq 3/2$:</span> 전체 시장 커버 + 경쟁형 NE ($p_A = p_B = 1$).</li>
+      <li><span class="case-label">$s \in [1, 3/2)$:</span> 전체 소비자 구매하지만 경쟁 완화. 대칭 NE: $(p_A, p_B) = (s - \tfrac{1}{2}, s - \tfrac{1}{2})$. — 2024 HW1 Q4, 2026 HW1 Q3.</li>
+      <li><span class="case-label">$s < 1$:</span> 중간에 <strong>도넛 구멍(hole)</strong> 생김. 일부 소비자 구매 안 함, 두 기업 local monopoly화 → 경쟁 실질 소멸.</li>
+    </ul>
+    <ul>
+      <li><strong>비대칭 품질 $s_A \neq s_B$</strong> (2024 Midterm Q2): 무차별 조건 식 다시 유도
+        $$s_A - p_A - kx^* = s_B - p_B - k(1 - x^*)$$
+        $$x^* = \frac{(s_A - s_B) - (p_A - p_B) + k}{2k}$$
+      </li>
+      <li>$k$ (단위 이동비용) 크기에 따라 균형 가격 달라짐.</li>
+    </ul>
+  </div>
+
+  <div class="block problems">
+    <h3><span class="icon">◈</span>기출</h3>
+    <span class="exam current">2026 HW1 Q3</span>
+    <span class="exam">2024 Midterm Q2</span>
+    <span class="exam">2025 HW1 Q(대응)</span>
+    <span class="exam">2024 HW1 Q4</span>
+  </div>
+</section>
+
+<!-- 11. Voting -->
+<section class="type application" id="t11">
+  <h2><span class="num">11</span>Voting (공간 투표)</h2>
+
+  <div class="block core">
+    <h3><span class="icon">◆</span>핵심</h3>
+    <p>유권자 $v$가 자기 성향과 가장 가까운 후보에 투표. 후보 A, B는 위치 $x_A, x_B$ 선택. Payoff = 득표율.
+      <strong>기본 결과</strong>: 중위수 정리 (Median Voter Theorem) → 양 후보 중앙 수렴 $x_A^* = x_B^* = 1/2$.</p>
+  </div>
+
+  <div class="block approach">
+    <h3><span class="icon">▶</span>풀이 절차</h3>
+    <ol>
+      <li>$x_A < x_B$ 가정: A의 득표 = $[0, \tfrac{x_A + x_B}{2}]$, B의 득표 = $[\tfrac{x_A + x_B}{2}, 1]$.</li>
+      <li>각 후보의 효용 (득표율) 식 작성.</li>
+      <li>$x_A < x_B$인 PSNE 불가능함을 증명 (BR로 한 후보가 상대에게 $\epsilon$ 근접 유인).</li>
+      <li>$x_A > x_B$도 대칭으로 불가능. 결론: $x_A = x_B = 1/2$ (중위수).</li>
+    </ol>
+  </div>
+
+  <div class="block caution">
+    <h3><span class="icon">⚠</span>주의점 — <em>문제 조건별 변종 확인 필수</em></h3>
+    <ul class="cases">
+      <li><span class="case-label">신념 비용 O:</span> 비용 $-\tfrac{1}{2}\lambda(s_i - x_i)^2$ 포함. $\lambda$ 작으면 중앙 수렴 유지 (내부해 없음), $\lambda$ 크면 후보가 자기 신념 쪽으로 치우친 내부해 존재.</li>
+      <li><span class="case-label">이산 타입:</span> 위치 $\in \{1, ..., 100\}$ 같은 자연수. 중위수가 홀/짝수 여부에 따라 균형 위치 1개 또는 2개.</li>
+      <li><span class="case-label">관측 가능:</span> B가 $x_A$ 관측 → Stackelberg. SPNE에서 B는 A 바로 옆에 붙어 과반 확보.</li>
+      <li><span class="case-label">관측 불가:</span> 동시 게임 → 양자 중위수 수렴.</li>
+      <li><span class="case-label">타이 처리:</span> 두 후보 동일 위치면 <strong>모든 유권자 50:50 확률로 분배</strong>.</li>
+    </ul>
+    <ul>
+      <li><strong>내부해 존재 조건</strong> 확인: 1계 조건만으로 판단 말고, 후보가 상대 위치로 이동 시 총 이득/손실 비교.</li>
+      <li>자연수 위치의 경우 <em>자기 성향과 정확히 일치하는 위치가 없으면 상대가 무차별</em> 상황 발생 → tie-breaking 조심.</li>
+    </ul>
+  </div>
+
+  <div class="block problems">
+    <h3><span class="icon">◈</span>기출</h3>
+    <span class="exam current">2026 HW1 Q2</span>
+    <span class="exam current">2026 HW2 Q3</span>
+    <span class="exam">2025 Midterm Q5</span>
+    <span class="exam">2025 HW1 Q2</span>
+    <span class="exam">2024 HW1 Q(voting)</span>
+  </div>
+</section>
+
+<!-- ====================================================== -->
+<!-- CATEGORY: 동적 게임 -->
+<!-- ====================================================== -->
+
+<div class="divider">동적 게임</div>
+
+<!-- 12. SPNE -->
+<section class="type dynamic" id="t12">
+  <h2><span class="num">12</span>Subgame Perfect Nash Equilibrium</h2>
+
+  <div class="block core">
+    <h3><span class="icon">◆</span>핵심</h3>
+    <p>전략 profile이 <strong>모든 subgame</strong>에서 NE. Extensive-form 게임의 refinement. 유한 완전정보 게임이면 <strong>역행귀납(Backward Induction)</strong>으로 찾음.</p>
+  </div>
+
+  <div class="block approach">
+    <h3><span class="icon">▶</span>풀이 절차 — 역행귀납</h3>
+    <ol>
+      <li>가장 뒤쪽 decision node / subgame에서 시작.</li>
+      <li>각 subgame에서 NE 찾기 (<em>normal-form subgame이면 PSNE + MSNE 모두</em> 고려).</li>
+      <li>해당 NE의 기대 payoff를 continuation value로 상위 stage에 전달.</li>
+      <li>Root까지 올라가며 반복.</li>
+      <li>각 information set에서의 행동 profile 전체를 SPNE 전략으로 표기.</li>
+    </ol>
+  </div>
+
+  <div class="block caution">
+    <h3><span class="icon">⚠</span>주의점 — <em>확장형 게임 체크리스트</em></h3>
+    <ul>
+      <li><strong>Subgame 개수 세기</strong>: Proper subgame만 카운트. Information set을 <em>가로지르는</em> 부분게임은 subgame 아님. 항상 (a) 문제로 자주 출제.</li>
+      <li><strong>Information set 개수</strong>: 플레이어별로 세기. 같은 선택지(같은 이동)을 가진 나눌 수 없는 노드 묶음.</li>
+      <li><strong>Normal form 변환 요청</strong>: 각 플레이어의 완전 contingent plan (모든 information set에 대한 행동)으로 전략 나열 — 2024 HW2 Q1a, Q2c.</li>
+    </ul>
+
+    <h3 style="margin-top:14px; color:var(--highlight);"><span class="icon">⚡</span>복합 구조 (Compound game)</h3>
+    <ul>
+      <li>Subgame이 <strong>normal-form 게임</strong>이면 MSNE까지 고려 → 여러 SPNE 분기 가능.</li>
+      <li>상위 stage에서 각 NE의 continuation payoff 다르므로 분기마다 SPNE 다름.</li>
+      <li>2025 Midterm Q3, 2026 HW2 Q1 유형.</li>
+    </ul>
+
+    <h3 style="margin-top:14px; color:var(--highlight);"><span class="icon">⚡</span>Firm-Worker 표준 패턴</h3>
+    <ol>
+      <li>Worker의 $L^*(K)$ FOC로 도출.</li>
+      <li>Firm이 $L^*(K)$ 내재화하여 $K^*$ 결정.</li>
+      <li><strong>Worker의 참여제약 (IR)</strong>: 현 기업 payoff ≥ outside option $wL - cL^2$의 최댓값. ← <em>자주 누락되는 체크포인트</em>.</li>
+      <li>IR이 binding/slack 구분.</li>
+    </ol>
+
+    <h3 style="margin-top:14px; color:var(--highlight);"><span class="icon">⚡</span>순차 Voting 패턴</h3>
+    <ol>
+      <li>B의 BR: 주어진 $x_A$에 대한 최적 위치 (중위수 결정).</li>
+      <li>A가 B의 반응 예측 → 자신의 $x_A^*$ 선택.</li>
+      <li>자연수 타입이면 경계 값 처리 주의.</li>
+    </ol>
+  </div>
+
+  <div class="block problems">
+    <h3><span class="icon">◈</span>기출</h3>
+    <span class="exam current">2026 HW2 Q1, Q2, Q3</span>
+    <span class="exam">2025 Midterm Q1, Q2, Q3</span>
+    <span class="exam">2025 HW2 Q1-3</span>
+    <span class="exam">2025F 논자시 Q2</span>
+    <span class="exam">2025S 논자시 Q2</span>
+    <span class="exam">2024 Midterm Q3</span>
+    <span class="exam">2024 HW2 Q1, Q2, Q4</span>
+  </div>
+</section>
+
+<!-- ====================================================== -->
+<!-- CHECKLIST -->
+<!-- ====================================================== -->
+
+<div class="checklist" id="checklist">
+  <h2>★ 시험 직전 체크리스트</h2>
+  <ul>
+    <li><strong>문제 스캔 후 유형 분류 먼저</strong>: normal/extensive 구분 → 동시/순차 → 완전정보/이탈유인 문제인지.</li>
+    <li><strong>PSNE 답안엔 항상 이탈유인 체크</strong>: 충분조건(이탈 X) + 필요조건(다른 profile은 NE 아님) 둘 다 명시.</li>
+    <li><strong>MSNE는 무차별 조건 명시</strong>: "이 전략이 혼합에 포함되려면 기대효용이 같아야" 한다는 문장 반드시 씀.</li>
+    <li><strong>Cournot/Bertrand는 tie-breaking 규칙 꼭 읽기</strong>: 비대칭 비용에서 균형 바뀜.</li>
+    <li><strong>Hotelling은 $s$ 구간 분기</strong>: 문제에 $s$ 범위 명시됐는지 확인하고 케이스 분석.</li>
+    <li><strong>Voting은 조건 체크</strong>: (i) 신념 비용 있는지, (ii) 이산/연속, (iii) 관측 가능/불가, (iv) tie-breaking 규칙.</li>
+    <li><strong>SPNE는 subgame 개수부터</strong>: (a) 문제로 자주 나옴. Information set 가로지르면 subgame 아님.</li>
+    <li><strong>Firm-worker / Stackelberg는 IR 체크 잊지 말기</strong>: 참여제약 명시적으로 답안에 씀.</li>
+    <li><strong>답안 시간 배분</strong>: 각 문제당 배점 × 3분 내외. 막히면 넘어가고 마지막에 돌아오기.</li>
+    <li><strong>수식 → 한글 해석 병기</strong>: "이 식이 의미하는 바는..." 한 줄로 풀이 전개 근거 설명.</li>
+  </ul>
+</div>
+
+</main>
+
+<footer>
+  ECO5031 · Graduate Microeconomics II · Prof. Keeyoung Rhee (SKKU) · 2026 Spring
+</footer>
+
+</body>
+</html>
